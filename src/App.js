@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+
+import CurrencyConverter from './Components/CurrencyConverter'
+// import CurrencyDisplay from './Components/CurrencyDisplay' alternatively we can use the CurrencyDisplay component rather than inline JSX. We would need to pass an amount and currency prop
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<>
+				<h2>Render Props</h2>
+				<CurrencyConverter
+					render={(currencyData, amount) => (
+						<p>
+							US Dollar ${amount.toFixed(2)} - {currencyData.name} {currencyData.symbol}
+							{(amount * currencyData.rate).toFixed(2)}
+						</p>
+					)}
+				/>
+			</>
+		)
+	}
 }
 
-export default App;
+export default App
