@@ -2,7 +2,7 @@
 
 # Project Summary
 
-In this project, we'll be creating two of the same projects. One will be written as a higher order component (HOC) and the other will be written as a render prop. It is important to remember that these are two different patterns to accomplish the same task. In this project we will be building a currency converter that will convert a foreign currency to USD.
+In this project, we'll be creating a project similar to what we created in the higher order component project. This one will be written as a render prop. It is important to remember that these are two different patterns to accomplish the same task. In this project we will be building a currency converter that will convert a foreign currency to USD.
 
 ## Step 1
 
@@ -12,6 +12,8 @@ In this step, we'll set up our file structure to keep things organized.
 
 ### Instructions
 
+- `Fork` and `clone` this project
+- Run `npm install`
 - Inside the `src` folder, create a `Components` folder.
 - Open `src/Components`. Create two new Files:
   - CurrencyConverter.js
