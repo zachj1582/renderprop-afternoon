@@ -83,11 +83,11 @@ class Currency extends Component {
 
 ### Summary
 
-In this step, we will create the boilerplate for our currency converter. this will include a drop down and buttons to increment and decrement the amount to convert.
+In this step, we will create the boilerplate for our currency converter. This will include a drop down and buttons to increment and decrement the amount to convert.
 
 ### Instructions
 
-- Set intial state for this component. We will need three keys: `currencyChosen : false`, `selected currency: 'Select Currency'` and `amount: 0`.
+- Set intial state for this component. We will need three keys: `currencyChosen : false`, `selectedCurrency: 'Select Currency'` and `amount: 0`.
 
 ```js
 const currencyData = [
@@ -99,8 +99,8 @@ const currencyData = [
 ]
 ```
 
-- We will use the above array, `currencyData`, to map over and dynamically create options inside of a soon to be created `select` element.
-- Create a `<select>` element to hold the options created above along with a single default option with a value of 'Select Country'.
+- In `render` use the above array, `currencyData`. Map over it and dynamically create `<option>` elements for each obect in the array.
+- Create a `<select>` element to hold the options created above along with a single default option with a value of 'Select Currency'.
 - Create two `<button>` elements, one should have `+` as it's inner text and the other should be `-`.
 - Below the `button`'s, wrap `this.props.render()` in curly braces
 
