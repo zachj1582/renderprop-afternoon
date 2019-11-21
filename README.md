@@ -42,12 +42,12 @@ In this step, we'll set up our file structure to keep things organized.
 
 ### Summary
 
-In this step, we'll create the skeleton for our render prop component.
+In this step, we'll create the skeleton for our render prop component (CurrencyConverter.js).
 
 ### Instructions
 
 - Import React.
-- Create a class component called `Currency`
+- Create a class component called `Currency` (**Yes, the class name will be different than the file name**)
 - The Currency component will have some state
 
 <details>
@@ -347,7 +347,7 @@ export default Currency
 import React, { Component } from 'react'
 import './App.css'
 
-import CurrencyConverter from './Components/CurrencyConverter/CurrencyConverter'
+import CurrencyConverter from './Components/CurrencyConverter.js'
 
 class App extends Component {
 	render() {
