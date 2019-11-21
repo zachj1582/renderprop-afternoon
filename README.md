@@ -48,7 +48,7 @@ In this step, we'll create the skeleton for our render prop component (CurrencyC
 
 - Import React.
 - Create a class component called `Currency` (**Yes, the class name will be different than the file name**)
-- The Currency component will have some state
+- The `Currency` component will have some state
 
 <details>
 
