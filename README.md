@@ -47,8 +47,8 @@ In this step, we'll create the skeleton for our render prop component (CurrencyC
 ### Instructions
 
 - Import React.
-- Create a class component called `Currency` (**Yes, the class name will be different than the file name**)
-- The `Currency` component will have some state
+- Create a class component called `CurrencyConverter`
+- The `CurrencyConverter` component will have some state
 
 <details>
 
@@ -58,7 +58,7 @@ In this step, we'll create the skeleton for our render prop component (CurrencyC
 
 Remember render props are another pattern for cross cutting concerns and making your code reusable, similar to a HOC.
 
-We first want to create a class based component we will call `Currency`. We chose a class based component because this will have some state involved.
+We first want to create a class based component we will call `CurrencyConverter`. We chose a class based component because this will have some state involved.
 
 </details>
 
@@ -69,7 +69,7 @@ We first want to create a class based component we will call `Currency`. We chos
 <summary> <code> src/Components/CurrencyConverter.js </code> </summary>
 
 ```jsx
-class Currency extends Component {
+class CurrencyConverter extends Component {
   state = {}
   render(){
     return (
@@ -102,9 +102,9 @@ const currencyData = [
 ```
 
 - In `render` use the above array, `currencyData`. Map over it and dynamically create `<option>` elements for each obect in the array.
-- Create a `<select>` element to hold the options created above along with a single default option with a value of 'Select Currency'.
+- Create a `<select>` element to hold the options created above along with a single default `<option>` with a value of 'Select Currency'.
 - Create two `<button>` elements, one should have `+` as it's inner text and the other should be `-`.
-- Below the `button`'s, wrap `this.props.render()` in curly braces
+- Below the `button`'s, wrap `this.props.render()` in curly braces, passing in the object that represents the selected currency and the `amount` from state
 
 <details>
 
@@ -112,7 +112,7 @@ const currencyData = [
 
 <br />
 
-- Set some intial state for this component. We will need a `currencyChosen` which will default to `false`, `selected currency` which will default as 'Select Currency' (spelling and capitalization are important here) and finally an `amount` with the default of `0`.
+- Set some intial state for this component. We will need a `currencyChosen` which will default to `false`, `selectedCurrency` which will default as 'Select Currency' (spelling and capitalization are important here) and finally an `amount` with the default of `0`.
 
 ```js
 const currencyData = [
@@ -124,10 +124,10 @@ const currencyData = [
 ]
 ```
 
-- Copy the above `currencyData` array inside of thhe `render()` method but outside of the `return` inside of the `Currency` component.
+- Copy the above `currencyData` array inside of thhe `render()` method but outside of the `return` inside of the `CurrencyConverter` component.
 - Using `.map()`, create an `<option>` element for each item of the `currencyData` array. Each `<option>` element should have a `key`, and `id` and have the individual currency name as text. call the new array `currencyOptions`.
 - Create a container div `<div>`. Inside of the `div` create a `<select>` element.
-- Inside of the `select` create a single `<option>` element with a attribute of `value='Select Currency'` and 'Select Curreny' as the inner text. Below that, inside of `{}` display the `currencyOptions`.
+- Inside of the `select` create a single `<option>` element with a attribute of `value='Select Currency'` and 'Select Currency' as the inner text. Below that, inside of `{}` display the `currencyOptions`.
 - Create a new `<div>` to hold buttons that will increment and decrement the currency amount.
 - Inside of the newly created `div`, create two `<button>` elements, one should have `+` as it's inner text and the other should be `-`. The button with the `+` should have a className of `add` and the button with the `-` should have a className of `minus`
 - Below the `button`'s, render `this.props.render()` in curly braces. This is the function we will use to display our soon to be created component. The `this.props.render()` will have two arguments; one which will use `selectedCurrency` from state as the index to select an option from the `currencyData` array and the other argument will be called `amount` which will be the value of amount on state.
@@ -142,7 +142,7 @@ const currencyData = [
 ```jsx
 import React, { Component } from 'react'
 
-class Currency extends Component {
+class CurrencyConverter extends Component {
 	state = {
 		currencyChosen: false,
 		selectedCurrency: 'Select Currency',
@@ -194,8 +194,10 @@ In this step, we'll create three methods to help us handle user interactions. We
 
 - Using the public class field syntax, create a method that will increment the count of amount on state. Use `setState` via the callback function syntax. Call this method `handleAmountIncrease`.
 - Using the public class field syntax, create a method that will decrement the count of amount on state. Use `setState` via the callback function syntax. Call this method `handleAmountDecrease`.
-- Using the public class field syntax, create a method that will handle the users selection from the dropdown. You will need to store their selection in a variable we will call `userValue`. Call this method `handleOptionSelect`.
+- Using the public class field syntax, create a method that will handle the users selection from the dropdown. You will need to store their selection in a variable we will call `userValue`. This should update the `selectedCurrency` and `currencyChosen` properties on state. Call this method `handleOptionSelect`.
+- Assign these functions to the appropriate elements and event handlers.
 - Export the function to be used in App.js
+- Import the `CurrencyConverter` component into `App` and render it, giving it a `render` prop
 
 <details>
 
@@ -247,7 +249,7 @@ handleOptionSelect = (evt) => {
   - Using an `onChange` event listener, use the `handleOptionSelect` method on the select element.
 - We will also export our component so we can use it on `App.js`.
 - Clear out all of the JSX from Create React app.
-- Render the new `Currency` component. It will need one prop called `render`. Remember, this prop can be called anything but it is common convention to call it `render`. This prop will contain an anonymous arrow function. Use a fragment as the container div.
+- Render the new `CurrencyConverter` component. It will need one prop called `render`. Remember, this prop can be called anything but it is common convention to call it `render`. This prop will contain an anonymous arrow function. Use a fragment as the container div.
 
 </details>
 
@@ -260,7 +262,7 @@ handleOptionSelect = (evt) => {
 ```jsx
 import React, { Component } from 'react'
 
-class Currency extends Component {
+class CurrencyConverter extends Component {
 	state = {
 		currencyChosen: false,
 		selectedCurrency: 'Select Currency',
@@ -334,7 +336,7 @@ class Currency extends Component {
 	}
 }
 
-export default Currency
+export default CurrencyConverter
 ```
 
 </details>
@@ -382,7 +384,7 @@ In this step, we'll write some JSX to display the exchanged currency.
 
 <br />
 
-- Take a look at our render prop on the Currency Component. It is an anonymous function. We know that functions can return anything and in this case we will be returning some JSX. Before that though, we need to pass in two parameters that wil represent our data when we invoke our render prop function in `CurrencyConverter.js`.
+- Take a look at our render prop on the CurrencyConverter Component. It is an anonymous function. We know that functions can return anything and in this case we will be returning some JSX. Before that though, we need to pass in two parameters that wil represent our data when we invoke our render prop function in `CurrencyConverter.js`.
 - Have our render prop function return a `p` tag.
 - The `p` element should show the US Dollar amount, the name of the currency, the symbol and then the amount of the exchanged currency.
 - If having this `p` element be represented as a new component, you can create a new component with the data passed down as a prop. The new component will be returned from the render prop rather than JSX.
@@ -469,7 +471,7 @@ This is happening because we are trying to display our data before we have anyth
 
 <br />
 
-Head down to the return of the `Currency` component inside of `withCurrency`. Here we will use a ternary to determine if our user has selected something from the dropdownn. Luckily on state we have a key of `currencyChose` which is a boolean. Use this to determine of we should display the result of invoking `this.props.render` or if we should display the text `Please Select Currency`.
+Head down to the return of the `CurrencyConverter` component inside of `withCurrency`. Here we will use a ternary to determine if our user has selected something from the dropdownn. Luckily on state we have a key of `currencyChosen` which is a boolean. Use this to determine if we should display the result of invoking `this.props.render` or if we should display the text `Please Select Currency`.
 
 </details>
 
@@ -483,7 +485,7 @@ Head down to the return of the `Currency` component inside of `withCurrency`. He
 import React, { Component } from 'react'
 import CurrencyDisplay from './CurrencyDisplay'
 
-class Currency extends Component {
+class CurrencyConverter extends Component {
 	state = {
 		currencyChosen: false,
 		selectedCurrency: 'Select Currency',
