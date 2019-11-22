@@ -116,11 +116,11 @@ const currencyData = [
 
 ```js
 const currencyData = [
-	{ name: 'Japanese Yen', symbol: '¥', rate: 113.6 },
-	{ name: 'British Pound', symbol: '£', rate: 0.77 },
-	{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32 },
-	{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41 },
-	{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01 }
+	{ name: 'Japanese Yen', symbol: '¥', rate: 113.6, id: 0 },
+	{ name: 'British Pound', symbol: '£', rate: 0.77, id: 1 },
+	{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32, id: 2 },
+	{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41, id: 3 },
+	{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01, id: 4 }
 ]
 ```
 
@@ -151,14 +151,14 @@ class CurrencyConverter extends Component {
 
 	render() {
 		const currencyData = [
-			{ name: 'Japanese Yen', symbol: '¥', rate: 113.6 },
-			{ name: 'British Pound', symbol: '£', rate: 0.77 },
-			{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32 },
-			{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41 },
-			{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01 }
+			{ name: 'Japanese Yen', symbol: '¥', rate: 113.6, id: 0 },
+			{ name: 'British Pound', symbol: '£', rate: 0.77, id: 1 },
+			{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32, id: 2 },
+			{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41, id: 3 },
+			{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01, id: 4 }
 		]
 		const currencyOptions = currencyData.map((currency, index) => (
-			<option key={index} value={index}>
+			<option key={currency.id} value={index}>
 				{currency.name}
 			</option>
 		))
@@ -211,7 +211,7 @@ In this step, we'll create three methods to help us handle user interactions. We
 handleAmountIncrease = () => {
 	this.setState((prevState) => {
 		return {
-			amount: (prevState.amount += 1)
+			amount: prevState.amount + 1
 		}
 	})
 }
@@ -223,7 +223,7 @@ handleAmountIncrease = () => {
 handleAmountDecrease = () => {
 	this.setState((prevState) => {
 		return {
-			amount: (prevState.amount -= 1)
+			amount: prevState.amount - 1
 		}
 	})
 }
@@ -300,14 +300,14 @@ class CurrencyConverter extends Component {
 
 	render() {
 		const currencyData = [
-			{ name: 'Japanese Yen', symbol: '¥', rate: 113.6 },
-			{ name: 'British Pound', symbol: '£', rate: 0.77 },
-			{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32 },
-			{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41 },
-			{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01 }
+			{ name: 'Japanese Yen', symbol: '¥', rate: 113.6, id: 0 },
+			{ name: 'British Pound', symbol: '£', rate: 0.77, id: 1 },
+			{ name: 'Canadian Dollar', symbol: 'CAD', rate: 1.32, id: 2 },
+			{ name: 'Mexican Peso', symbol: 'Mex$', rate: 20.41, id: 3 },
+			{ name: 'Swiss Franc', symbol: 'Fr.', rate: 1.01, id: 4 }
 		]
 		const currencyOptions = currencyData.map((currency, index) => (
-			<option key={index} value={index}>
+			<option key={currency.id} value={index}>
 				{currency.name}
 			</option>
 		))
@@ -384,7 +384,7 @@ In this step, we'll write some JSX to display the exchanged currency.
 
 <br />
 
-- Take a look at our render prop on the CurrencyConverter Component. It is an anonymous function. We know that functions can return anything and in this case we will be returning some JSX. Before that though, we need to pass in two parameters that wil represent our data when we invoke our render prop function in `CurrencyConverter.js`.
+- Take a look at our render prop on the CurrencyConverter Component. It is an anonymous function. We know that functions can return anything and in this case we will be returning some JSX. Before that though, we need to pass in two parameters that will represent our data when we invoke our render prop function in `CurrencyConverter.js`.
 - Have our render prop function return a `p` tag.
 - The `p` element should show the US Dollar amount, the name of the currency, the symbol and then the amount of the exchanged currency.
 - If having this `p` element be represented as a new component, you can create a new component with the data passed down as a prop. The new component will be returned from the render prop rather than JSX.
@@ -431,7 +431,7 @@ export default App
 
 ### Instructions
 
-If you want to creae a separate component to render the exchanged currency rather than JSX, take a look at the component below that we would then import into `App.js`
+If you want to create a separate component to render the exchanged currency rather than JSX, take a look at the component below that we would then import into `App.js`
 
 <details>
 
@@ -471,7 +471,7 @@ This is happening because we are trying to display our data before we have anyth
 
 <br />
 
-Head down to the return of the `CurrencyConverter` component inside of `withCurrency`. Here we will use a ternary to determine if our user has selected something from the dropdownn. Luckily on state we have a key of `currencyChosen` which is a boolean. Use this to determine if we should display the result of invoking `this.props.render` or if we should display the text `Please Select Currency`.
+Head down to the return of the `CurrencyConverter` component. Here we will use a ternary to determine if our user has selected something from the dropdown. Luckily on state we have a key of `currencyChosen` which is a boolean. Use this to determine if we should display the result of invoking `this.props.render` or if we should display the text `Please Select Currency`.
 
 </details>
 
@@ -520,9 +520,7 @@ class CurrencyConverter extends Component {
 	}
 }
 
-const ExchangedCurrency = withCurrency(CurrencyDisplay)
-
-export default ExchangedCurrency
+export default CurrencyConverter
 ```
 
 </details>
