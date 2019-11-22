@@ -380,7 +380,7 @@ In this step, we'll write some JSX to display the exchanged currency.
 
 <details>
 
-<summary> <code> Detailed Instructions </code> Pt 1 </summary>
+<summary> <code> Detailed Instructions </code> </summary>
 
 <br />
 
