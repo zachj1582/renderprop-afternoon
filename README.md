@@ -396,14 +396,13 @@ In this step, we'll write some JSX to display the exchanged currency.
 
 <details>
 
-<summary> <code> src/Components/CurrencyConverter.js </code> </summary>
+<summary> <code> src/App.js </code> </summary>
 
 ```jsx
 import React, { Component } from 'react'
 import './App.css'
 
 import CurrencyConverter from './Components/CurrencyConverter'
-// import CurrencyDisplay from './Components/CurrencyDisplay' alternatively we can use the CurrencyDisplay component rather than inline JSX. We would need to pass an amount and currency prop
 
 class App extends Component {
 	render() {
@@ -429,9 +428,34 @@ export default App
 
 </details>
 
+## Step 6
+
+### Summary
+
+In this step we will refactor the JSX you wrote in `App` in the previous step into a reusable component in `CurrencyDisplay`. We will then replace that JSX with the newly created `CurrencyDisplay` component.
+
 ### Instructions
 
-If you want to create a separate component to render the exchanged currency rather than JSX, take a look at the component below that we would then import into `App.js`
+- Create a stateless, functional component in `CurrencyDisplay.js`
+- Have it return the JSX that we created in `App`, getting it's values from props
+- Replace the JSX returned from the render prop in `App` to be the `CurrencyDisplay` component
+
+<details>
+
+<summary> <code> Detailed Instructions </code> </summary>
+
+<br />
+
+- In `CurrencyDisplay.js` import React. Without having React in scope, we cannot use JSX.
+- Create a function expression called `CurrencyDisplay` using arrow function syntax. Have it accept `props` as its only parameter
+- Return a `<p>` tag that contains the same JSX as what we have in the `<p>` tag in `App`. Access the `currencyData` and `amount` values off of the `props` object.
+- Export `CurrencyDisplay` by default from `CurrencyDisplay.js`
+- In `App`, import the `CurrencyDisplay` component from `CurrencyDisplay.js`
+- Delete the `<p>` tag being returned by the `render` prop of `CurrencyConverter`. Replace it, returning an instance of the `CurrencyDisplay` component instead. Pass the `CurrencyDisplay` component props of `currencyData` and `amount` that are equal to the parameters of the same name being taken in to your `render` prop callback function.
+
+</details>
+
+### Solution
 
 <details>
 
@@ -442,9 +466,9 @@ import React from 'react'
 
 const CurrencyDisplay = (props) => (
 	<p>
-		US Dollar ${props.amount.toFixed(2)} - {props.currency.name}{' '}
-		{props.currency.symbol}
-		{(props.amount * props.currency.rate).toFixed(2)}
+		US Dollar ${props.amount.toFixed(2)} - {props.currencyData.name}{' '}
+		{props.currencyData.symbol}
+		{(props.amount * props.currencyData.rate).toFixed(2)}
 	</p>
 )
 
@@ -453,7 +477,38 @@ export default CurrencyDisplay
 
 </details>
 
-## Step 6
+<details>
+
+<summary> <code> src/App.js </code> </summary>
+
+```jsx
+import React, { Component } from 'react'
+import './App.css'
+
+import CurrencyConverter from './Components/CurrencyConverter'
+import CurrencyDisplay from './Components/CurrencyDisplay'
+
+class App extends Component {
+	render() {
+		return (
+			<>
+				<h2>Render Props</h2>
+				<CurrencyConverter
+					render={(currencyData, amount) => (
+						<CurrencyDisplay currencyData={currencyData} amount={amount} />
+					)}
+				/>
+			</>
+		)
+	}
+}
+
+export default App
+```
+
+</details>
+
+## Step 7
 
 ### Summary
 
